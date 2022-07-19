@@ -1,5 +1,6 @@
 import React from 'react'
 import Character from './components/Character'
+import "./App.css"
 
 class App extends React.Component {
   constructor (){
@@ -21,8 +22,8 @@ class App extends React.Component {
 	render() {
 		return(
       <div className='Container'>
-        <h1>Game of thrones</h1>
-        <div className=''>
+        <h1 className='text-center mt-3 text-light'>Game of thrones</h1>
+        <div className='d-flex flex-wrap justify-content-center'>
           {this.state.characters.map((character) => {
             return(
               <Character
@@ -32,7 +33,6 @@ class App extends React.Component {
               />
             )
           })}
-
         </div>
       </div>
 		)
