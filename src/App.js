@@ -12,8 +12,11 @@ class App extends React.Component {
   }
 
   async componentDidMount(){
+    // personnages de got
     const request = await fetch("https://thronesapi.com/api/v2/Characters")
     const response = await request.json()
+
+    // 
 
     this.setState({
       characters: response,
@@ -25,6 +28,16 @@ class App extends React.Component {
 
     this.setState({
       favorites: clonedFavorites,
+    })
+  }
+
+  handleRemoveFavoriteClick = (character) => {
+    const clonedFavorites = [...this.state.favorites]
+    const index = clonedFavorites.indexOf(character)
+    clonedFavorites.splice(index, 1);
+
+    this.setState({
+        favorites: clonedFavorites,
     })
   }
 
@@ -45,6 +58,23 @@ class App extends React.Component {
             )
           })}
         </div>
+
+        <ul className="p-3">
+                    <h3 className='text-warning'>Favorites :</h3>
+                    {this.state.favorites.map((character) => {
+                        return (
+                            <li className="text-white d-flex justify-content-between m-2">
+                                {character.fullName}
+                                <button
+                                    className="ms-2 btn btn-danger"
+                                    onClick={() => this.handleRemoveFavoriteClick(character)}
+                                >
+                                    X
+                                </button>
+                            </li>
+                        );
+                    })}
+                </ul>
       </div>
 		)
 	}
