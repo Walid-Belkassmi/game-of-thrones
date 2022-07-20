@@ -7,6 +7,7 @@ class App extends React.Component {
     super()
     this.state = {
       characters: [],
+      favorites: [],
     }
   }
 
@@ -19,7 +20,16 @@ class App extends React.Component {
     })
   }
 
+  handleFavoriteClick = (character) => {
+    const clonedFavorites = [ ...this.state.favorites, character]
+
+    this.setState({
+      favorites: clonedFavorites,
+    })
+  }
+
 	render() {
+    console.log(this.state.favorites)
 		return(
       <div className='Container'>
         <h1 className='text-center mt-3 text-light'>Game of thrones</h1>
@@ -30,6 +40,7 @@ class App extends React.Component {
                 name = {character.fullName}
                 title = {character.title}
                 image= {character.imageUrl}
+                favorite = {() => this.handleFavoriteClick(character)}
               />
             )
           })}
